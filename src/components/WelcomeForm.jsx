@@ -18,7 +18,7 @@ class WelcomeForm extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.dispatch(addWelcomeAsync(this.state.author,this.state.content))
-                  .then(()=>dispatch(getWelcomeAsync())).then(()=>console.log())
+                  .then(()=>this.props.dispatch(getWelcomeAsync())).then(()=>console.log())
       }
 
     onAuthorChange = (e) => {
