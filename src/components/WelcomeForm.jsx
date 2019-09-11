@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {addWelcome} from '../actions/welcomeActions';
+import {getWelcomeAsync ,addWelcomeAsync} from '../actions/welcomeActions';
 
 class WelcomeForm extends Component{
     constructor(props) {
@@ -10,10 +10,16 @@ class WelcomeForm extends Component{
         }
     }
 
-    onWelcomeFormSubmit = (e) => {
+    // onWelcomeFormSubmit = (e) => {
+    //     e.preventDefault();
+    //     this.props.dispatch(addWelcome(this.state.author, this.state.content));
+    // }
+
+    handleSubmit = (e) => {
         e.preventDefault();
-        this.props.dispatch(addWelcome(this.state.author, this.state.content));
-    }
+        this.props.dispatch(addWelcomeAsync(this.state.author,this.state.content))
+                  .then(()=>dispatch(getWelcomeAsync())).then(()=>console.log())
+      }
 
     onAuthorChange = (e) => {
         this.setState({author:e.target.value});
@@ -25,7 +31,7 @@ class WelcomeForm extends Component{
 
     render() {
         return (
-            <form onSubmit={this.onWelcomeFormSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label>
                     Author:
                     <input type="text" name="author" value={this.state.author} onChange={this.onAuthorChange}/>

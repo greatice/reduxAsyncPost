@@ -5,16 +5,14 @@ import WelcomeList from './WelcomeList';
 import Counter from './Counter';
 import WelcomeForm from "./WelcomeForm";
 import { getWelcomeAsync } from '../actions/welcomeActions';
-
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
     this.props.dispatch(getWelcomeAsync());
   }
-
+  
   render() {
     const {welcomeList, count, diff, dispatch} = this.props;
     return (
@@ -26,7 +24,6 @@ class App extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     welcomeList: state.welcome,
@@ -34,7 +31,5 @@ const mapStateToProps = (state) => {
     diff: state.counter.diff,
   }
 }
-
 const AppC = connect(mapStateToProps)(App)
-
 export default AppC;
